@@ -9,7 +9,7 @@ const app = express();
 app.use(cors());
 
 config({
-    path: './config/config.env'
+    path: './.env'
 });
 const PORT = process.env.PORT || 5000;
 connectDB(process.env.DATABASE_URL);
