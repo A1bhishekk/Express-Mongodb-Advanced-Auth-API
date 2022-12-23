@@ -32,7 +32,7 @@ class UserControllers {
                         // jwt token create 
                         const saved_user= await UserModel.findOne({email:email})
                         const token = jwt.sign({ _id: saved_user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '5d' });
-
+                    //    ********************
                         return res.status(201).json({
                             status: "success",
                             message: "User registered successfully",
@@ -74,9 +74,13 @@ class UserControllers {
                 if(user !=null){
                     const match= await bcrypt.compare(password, user.password)
                     if(match){
+                        // jwt token create
+                        const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '5d' });
+
                         return res.status(200).json({
                             status: "success",
                             message: "User logged in successfully",
+                            token: token,
                             user:user
                         })
                     }else{
