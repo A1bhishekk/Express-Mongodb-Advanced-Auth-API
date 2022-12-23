@@ -18,7 +18,7 @@ connectDB(process.env.DATABASE_URL);
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.send(`<h1 style="text-align":"center">Technical Abhi Api is Working </h1>`)
+    res.send(`<h2>Technical Abhi Api is Working fine</h2>`)
 })
 // load all routes
 app.use('/api/v1/user', userRoutes);

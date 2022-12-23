@@ -1,6 +1,6 @@
 import UserModel from "../models/userSchema.js";
 import bcrypt from "bcrypt";
-
+import jwt from "jsonwebtoken";
 class UserControllers {
 
     // register api controller
@@ -29,9 +29,14 @@ class UserControllers {
                         })
 
                         await newUser.save()
+                        // jwt token create 
+                        const saved_user= await UserModel.findOne({email:email})
+                        const token = jwt.sign({ _id: saved_user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '5d' });
+
                         return res.status(201).json({
                             status: "success",
                             message: "User registered successfully",
+                            token: token,
                             user:newUser
                         })
 
