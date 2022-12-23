@@ -16,6 +16,7 @@ router.post('/register', UserControllers.userRegistration);
 router.post('/login', UserControllers.userLogin);
 router.post('/send-reset-password-email', UserControllers.sendUserPasswordResetEmail);
 router.post('/reset-password/:id/:token', UserControllers.userPasswordReset);
+router.get('/', UserControllers.getAllUsers)
 
 //protected routes
 router.post('/changepassword', UserControllers.changeUserPassword);
