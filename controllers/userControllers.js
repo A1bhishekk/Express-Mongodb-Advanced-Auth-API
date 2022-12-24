@@ -186,26 +186,26 @@ class UserControllers {
                 const secret = user._id + process.env.JWT_SECRET_KEY
                 const token = jwt.sign({ userID: user._id }, secret, { expiresIn: '15m' })
                 const link = `http://127.0.0.1:3000/api/user/reset/${user._id}/${token}`
-                // console.log(link)
+                console.log(link)
                 // // Send Email
-                let info = await transporter.sendMail({
-                  from: process.env.EMAIL_FROM,
-                  to: user.email,
-                  subject: "Technical Abhi - Password Reset Link",
-                //   styled html template with ejs
-                html:`
-                <pre>
-                <h1>Technical Abhi</h1>
-                <h2>Reset Password</h2>
-                <p>Click on the link to reset your password</p>
-                <a href="${link}">${link}</a>
-                <p>Link will expire in 15 minutes</p>
-                <p>Thanks & Regards</p>
-                <p>Technical Abhi</p>
-                </pre>
-                `
-                })
-                res.send({ "status": "success", "message": "Password Reset Email Sent... Please Check Your Email",info })
+                // let info = await transporter.sendMail({
+                //   from: process.env.EMAIL_FROM,
+                //   to: user.email,
+                //   subject: "Technical Abhi - Password Reset Link",
+                // //   styled html template with ejs
+                // html:`
+                // <pre>
+                // <h1>Technical Abhi</h1>
+                // <h2>Reset Password</h2>
+                // <p>Click on the link to reset your password</p>
+                // <a href="${link}">${link}</a>
+                // <p>Link will expire in 15 minutes</p>
+                // <p>Thanks & Regards</p>
+                // <p>Technical Abhi</p>
+                // </pre>
+                // `
+                // })
+                res.send({ "status": "success", "message": "Password Reset Email Sent... Please Check Your Email",link })
             } else {
                 res.send({ "status": "failed", "message": "Email doesn't exists" })
             }
